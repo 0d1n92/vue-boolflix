@@ -43,15 +43,14 @@ Ricreiamo una webapp, con layout simil-Netflix
             <div  class="hover_box">
               <ul class="info">
                 <li><strong>Title: </strong>{{infofilm.title}} </li>
-                <li><strong>Original Title: </strong>lorem ipsum </li>
-                <li><strong>Leanguages: </strong>LR</li>
+                <li><strong>Original Title: </strong>{{infofilm.original_title}} </li>
+                <li><strong>Leanguages: </strong>{{infofilm.original_language}}</li>
                 <li ><strong class="vote">Vote: </strong> </li>
-                <li><strong>Overwiev: </strong>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip </li>
+                <li class="overview"><strong>Overview: </strong>{{infofilm.overview}}</li>
               </ul>
             </div>
             <img class="cover" :src="img_url + infofilm.poster_path" alt="">
           </section>
-
         </div>
 
       </main>

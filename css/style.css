@@ -73,7 +73,7 @@ header {
 }
 /* section films*/
 section.box_film {
-  margin: 0 20px;
+  margin: 10px 20px;
   position: relative;
   border: 1px solid white;
 }
@@ -104,6 +104,25 @@ ul.info > li {
   padding-right: 3px;
   vertical-align: middle;
   font-weight: 900;
+}
+
+.container_overview {
+  width: 100%;
+
+}
+
+li.overview {
+  display: block;
+ overflow: auto;
+ max-height: 150px;
+ min-height: 100px;
+}
+li.overview::-webkit-scrollbar {
+  width: 5px;
+}
+li.overview::-webkit-scrollbar-thumb {
+  background:#d81f26;
+  border-radius: 10px;
 }
 /* section films CLOSE */
 /* MAIN CLOSE */
