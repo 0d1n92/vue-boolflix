@@ -13,6 +13,7 @@ Ricreiamo una webapp, con layout simil-Netflix
   <head>
     <meta charset="utf-8">
     <title>Fake Netflix</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.0/axios.min.js" integrity="sha512-DZqqY3PiOvTP9HkjIWgjO6ouCbq+dxqWoJZ/Q+zPYNHmlnI2dQnbJ5bxAHpAMw+LXRm4D72EIRXzvcHQtE8/VQ==" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp" crossorigin="anonymous">
     <link rel="stylesheet" href="css/style.css">
@@ -30,7 +31,7 @@ Ricreiamo una webapp, con layout simil-Netflix
         </div>
         <div id="header_right"  class="float_right">
           <nav>
-            <input type="search" name="" value="">
+            <input  v-model="title" type="search" name="" value=""><button>search</button>
           </nav>
         </div>
       </header>
@@ -38,43 +39,19 @@ Ricreiamo una webapp, con layout simil-Netflix
       <main>
 
         <div id="container_library">
-          <section class="box_film">
-            <div class="hover_box">
+          <section v-for="infofilm in films"  class="box_film">
+            <div  class="hover_box">
               <ul class="info">
-                <li><strong>Title: </strong>Lorem ipsum </li>
+                <li><strong>Title: </strong>{{infofilm.title}} </li>
                 <li><strong>Original Title: </strong>lorem ipsum </li>
                 <li><strong>Leanguages: </strong>LR</li>
                 <li ><strong class="vote">Vote: </strong> </li>
                 <li><strong>Overwiev: </strong>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip </li>
               </ul>
             </div>
-            <img class="cover" src="https://image.tmdb.org/t/p/w600_and_h900_bestv2/xlBivetfrtF84Yx0zISShnNtHYe.jpg" alt="">
+            <img class="cover" :src="img_url + infofilm.poster_path" alt="">
           </section>
-          <section class="box_film">
-            <div class="hover_box">
-              <ul class="info">
-                <li><strong>Title: </strong>Lorem ipsum </li>
-                <li><strong>Original Title: </strong>lorem ipsum </li>
-                <li><strong>Leanguages: </strong>LR</li>
-                <li ><strong class="vote">Vote: </strong> </li>
-                <li><strong>Overwiev: </strong>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip </li>
 
-              </ul>
-            </div>
-            <img class="cover" src="https://image.tmdb.org/t/p/w600_and_h900_bestv2/xlBivetfrtF84Yx0zISShnNtHYe.jpg" alt="">
-          </section>
-          <section class="box_film">
-            <div class="hover_box">
-              <ul class="info">
-                <li><strong>Title: </strong>Lorem ipsum </li>
-                <li><strong>Original Title: </strong>lorem ipsum </li>
-                <li><strong>Leanguages: </strong>LR</li>
-                <li ><strong class="vote">Vote: </strong> </li>
-                <li><strong>Overwiev: </strong>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip </li>
-              </ul>
-            </div>
-            <img class="cover" src="https://image.tmdb.org/t/p/w600_and_h900_bestv2/xlBivetfrtF84Yx0zISShnNtHYe.jpg" alt="">
-          </section>
         </div>
 
       </main>

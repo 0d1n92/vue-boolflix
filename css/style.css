@@ -69,6 +69,7 @@ header {
   margin-top: 10px;
   display: flex;
   justify-content: flex-start;
+  flex-wrap: wrap;
 }
 /* section films*/
 section.box_film {
