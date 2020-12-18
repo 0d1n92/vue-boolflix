@@ -31,7 +31,7 @@ Ricreiamo una webapp, con layout simil-Netflix
         </div>
         <div id="header_right"  class="float_right">
           <nav>
-            <input  v-model="title" type="search" name="" value=""><button>search</button>
+            <input  v-model="title" @keydown="search()" type="search" name="" value=""><button>search</button>
           </nav>
         </div>
       </header>
@@ -39,7 +39,7 @@ Ricreiamo una webapp, con layout simil-Netflix
       <main>
 
         <div id="container_library">
-          <section v-for="infofilm in films"  class="box_film">
+          <section v-if="infofilm.title"v-for="infofilm in films"  class="box_film">
             <div  class="hover_box">
               <ul class="info">
                 <li><strong>Title: </strong>{{infofilm.title}} </li>
