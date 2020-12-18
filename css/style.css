@@ -63,3 +63,46 @@ header {
 /* header right CLOSE */
 
 /* HEADER-CLOSE */
+
+/* MAIN */
+#container_library {
+  margin-top: 10px;
+  display: flex;
+  justify-content: flex-start;
+}
+/* section films*/
+section.box_film {
+  margin: 0 20px;
+  position: relative;
+  border: 1px solid white;
+}
+section.box_film .hover_box {
+  height: 100%;
+  width: 100%;
+  color: white;
+  padding: 50px 10px 0px 10px;
+  top:0;
+  position: absolute;
+  display: none;
+  background-color: rgba(0, 0, 0, 0.8);
+}
+section.box_film:hover .hover_box {
+  display: block;
+}
+.box_film> img.cover  {
+  height: 330px;
+}
+ul.info > li {
+  list-style: none;
+}
+.vote::after {
+  font-family: "Font Awesome 5 Free";
+  content: "\f005 \f005 \f005 \f005 \f005";
+  color:#ffbd00;
+  display: inline-block;
+  padding-right: 3px;
+  vertical-align: middle;
+  font-weight: 900;
+}
+/* section films CLOSE */
+/* MAIN CLOSE */
