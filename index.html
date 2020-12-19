@@ -31,7 +31,7 @@ Ricreiamo una webapp, con layout simil-Netflix
         </div>
         <div id="header_right"  class="float_right">
           <nav>
-            <input  v-model="title" @keydown="search()" type="search" name="" value=""><button>search</button>
+            <input  v-model="title" @keydown="search()" type="search" name="" value="">
           </nav>
         </div>
       </header>
@@ -39,7 +39,7 @@ Ricreiamo una webapp, con layout simil-Netflix
       <main>
 
         <div id="container_library">
-          <section v-if="infofilm.title"v-for="infofilm in films"  class="box_film">
+          <section  v-for="infofilm in films"  class="box_film">
             <div  class="hover_box">
               <ul class="info">
                 <li><strong>Title: </strong>{{infofilm.title}} </li>
@@ -49,7 +49,9 @@ Ricreiamo una webapp, con layout simil-Netflix
                 <li class="overview"><strong>Overview: </strong>{{infofilm.overview}}</li>
               </ul>
             </div>
-            <img class="cover" :src="img_url + infofilm.poster_path" alt="">
+            <p class="error_path" v-if="infofilm.poster_path == null">poster not available</p>
+            <img  class="cover" :src="img_url + infofilm.poster_path" alt="" v-else>
+
           </section>
         </div>
 

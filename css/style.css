@@ -34,10 +34,18 @@ textarea:focus {
 .float_right {
   float:right;
 }
+.error_path {
+  width: 100%;
+  position: absolute;
+  top:50%;
+  text-align: center;
+  color:#434343;
+}
 
 body {
   height: 100vh;
   background-color: #434343;
+  overflow: scroll;
 }
 /* HEADER */
 header {
@@ -73,9 +81,13 @@ header {
 }
 /* section films*/
 section.box_film {
+  height: 336px;
+  width: 222px;
   margin: 10px 20px;
   position: relative;
   border: 1px solid white;
+  background-color: rgba(0, 0, 0, 0.8);
+
 }
 section.box_film .hover_box {
   height: 100%;
@@ -90,6 +102,10 @@ section.box_film .hover_box {
 section.box_film:hover .hover_box {
   display: block;
 }
+section.box_film:hover .error_path {
+  display: none;
+}
+
 .box_film> img.cover  {
   height: 330px;
 }

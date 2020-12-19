@@ -13,7 +13,7 @@ var  app= new Vue({
   methods: {
     search:function (array) {
       let self= this;
-    if (self.title!="") {
+    if (self.title!="" && self.title.length >= 3) {
       axios.get('https://api.themoviedb.org/3/search/movie', {
           params: {
             api_key: "498c9ec3394d0a225e5b99e29b024805",
