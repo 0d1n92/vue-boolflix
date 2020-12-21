@@ -9,7 +9,7 @@ Ricreiamo una webapp, con layout simil-Netflix
         ◦ Lingua
         ◦ Voto sotto forma di stelline colorate
         ◦ Immagine placeholder larghezza  -->
-<html lang="it" dir="ltr">
+<html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
     <title>Fake Netflix</title>
@@ -39,13 +39,13 @@ Ricreiamo una webapp, con layout simil-Netflix
       <main>
 
         <div id="container_library">
-          <section  v-for="infofilm in films"  class="box_film">
+          <section  v-for="(infofilm,index) in films"  class="box_film">
             <div  class="hover_box">
               <ul class="info">
-                <li><strong>Title: </strong>{{infofilm.title}} </li>
+                <li class="title_film"><strong>Title: </strong><h2>{{infofilm.title}}</h2> </li>
                 <li><strong>Original Title: </strong>{{infofilm.original_title}} </li>
                 <li><strong>Leanguages: </strong>{{infofilm.original_language}}</li>
-                <li ><strong class="vote">Vote: </strong> </li>
+                <li ><strong class="vote">Vote: {{infofilm.vote_average}} </strong> </li>
                 <li class="overview"><strong>Overview: </strong>{{infofilm.overview}}</li>
               </ul>
             </div>

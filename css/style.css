@@ -112,6 +112,11 @@ section.box_film:hover .error_path {
 ul.info > li {
   list-style: none;
 }
+ul.info > li h2 {
+  font-size: 16px;
+  font-weight: normal;
+  display: inline;
+}
 .vote::after {
   font-family: "Font Awesome 5 Free";
   content: "\f005 \f005 \f005 \f005 \f005";
