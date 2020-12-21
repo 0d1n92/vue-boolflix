@@ -1,6 +1,5 @@
 //Milestone 2:
-// Trasformiamo il voto da 1 a 10 decimale in un numero intero da 1 a 5, così da permetterci di stampare a schermo un numero di stelle piene che vanno da 1 a 5, lasciando le restanti vuote (troviamo le icone in FontAwesome).
-// Arrotondiamo sempre per eccesso all’unità successiva, non gestiamo icone mezze piene (o mezze vuote :P)
+
 // Trasformiamo poi la stringa statica della lingua in una vera e propria bandiera della nazione corrispondente, gestendo il caso in cui non abbiamo la bandiera della nazione ritornata dall’API (le flag non ci sono in FontAwesome).
 // Allarghiamo poi la ricerca anche alle serie tv. Con la stessa azione di ricerca dovremo prendere sia i film che corrispondono alla query, sia le serie tv, stando attenti ad avere alla fine dei valori simili (le serie e i film hanno campi nel JSON di risposta diversi, simili ma non sempre identici)
 // Qui un esempio di chiamata per le serie tv:
@@ -32,18 +31,17 @@ var  app= new Vue({
         ).then(
           (information) => {
             let movieData=information.data.results;
-           setTimeout(function (){self.films= movieData
+           setTimeout(function (){
+            self.films= self.leanguagesFlag(movieData);
+
+                console.log(self.films[1].flag_img);
             self.films.forEach((item, i) => {
               if (self.films.length > 0 ) {
               item.vote_average=self.voteAverageRound(movieData[i].vote_average);
               }
             });
 
-
            },2000);
-
-
-           // self.films[self.indexMovie].vote_average=self.voteAverageRound(movieData[self.indexMovie].vote_average);
         });
       }
     },
@@ -52,6 +50,21 @@ var  app= new Vue({
       // voteRound=(Math.round(vote *2,  0.5) / 2)/2; for 0.5
       let voteRound=Math.ceil(vote/2);
       return voteRound;
+    },
+    leanguagesFlag: function (array) {
+
+      array.forEach((item, i) => {
+
+        if(item.original_language ==="en") {
+          item.flag_img="uk-16.png";
+        } else if (item.original_language ==="it") {
+          item.flag_img="it-16.png";
+        } else if (item.original_language ==="ja") {
+          item.flag_img="jp-16.png";
+        };
+
+      });
+        return array;
     }
   }
 });
