@@ -50,7 +50,7 @@ var  app= new Vue({
     voteAverageRound: function (vote) {
       // Math.Round(value * 2, MidpointRounding.AwayFromZero) / 2
       // voteRound=(Math.round(vote *2,  0.5) / 2)/2; for 0.5
-      let voteRound=Math.round(vote)/2
+      let voteRound=Math.ceil(vote/2);
       return voteRound;
     }
   }
