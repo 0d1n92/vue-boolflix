@@ -117,7 +117,7 @@ ul.info > li h2 {
   font-weight: normal;
   display: inline;
 }
-.vote::after {
+/* .vote::after {
   font-family: "Font Awesome 5 Free";
   content: "\f005 \f005 \f005 \f005 \f005";
   color:#ffbd00;
@@ -125,7 +125,7 @@ ul.info > li h2 {
   padding-right: 3px;
   vertical-align: middle;
   font-weight: 900;
-}
+} */
 
 .container_overview {
   width: 100%;

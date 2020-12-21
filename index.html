@@ -45,7 +45,7 @@ Ricreiamo una webapp, con layout simil-Netflix
                 <li class="title_film"><strong>Title: </strong><h2>{{infofilm.title}}</h2> </li>
                 <li><strong>Original Title: </strong>{{infofilm.original_title}} </li>
                 <li><strong>Leanguages: </strong>{{infofilm.original_language}}</li>
-                <li ><strong class="vote">Vote: {{infofilm.vote_average}} </strong> </li>
+                <li><strong class="vote">Vote:</strong> <i v-for="star in infofilm.vote_average" class="fas fa-star"></i><i v-for="star in (5 -  infofilm.vote_average)" class="far fa-star"></i></li>
                 <li class="overview"><strong>Overview: </strong>{{infofilm.overview}}</li>
               </ul>
             </div>
