@@ -42,16 +42,21 @@ Ricreiamo una webapp, con layout simil-Netflix
           <section  v-for="(infofilm,index) in films"  class="box_film">
             <div  class="hover_box">
               <ul class="info">
-                <li class="title_film"><strong>Title: </strong><h2>{{infofilm.title}}</h2> </li>
-                <li><strong>Original Title: </strong>{{infofilm.original_title}} </li>
+                <li class="title_film"><strong>Title: </strong><h2 v-if="infofilm.title!=undefined" >{{infofilm.title}}</h2><h2 v-else>{{infofilm.name}}</h2> </li>
+                <li><strong>Original Title: </strong>
+                  <span v-if="infofilm.original_title!=undefined">
+                    {{infofilm.original_title}}
+                  </span>
+                  <span v-else>
+                    {{infofilm.original_name}}
+                  </span>
+                </li>
                 <li>
                   <strong>Leanguages:</strong>
-                    <img v-if="infofilm.original_language == 'en'|| infofilm.original_language=='it' || infofilm.original_language=='ja'" :src="'img/icons/'+ infofilm.flag_img" :alt="infofilm.original_language"><p v-else>
+                    <img v-if="infofilm.original_language == 'en'|| infofilm.original_language=='it' || infofilm.original_language=='ja'" :src="'img/icons/'+ infofilm.flag_img" :alt="infofilm.original_language"><span v-else>
                     {{infofilm.original_language}}
-                  </p>
+                  </span>
                 </li>
-
-
                 <li><strong class="vote">Vote:</strong> <i v-for="star in infofilm.vote_average" class="fas fa-star"></i><i v-for="star in (5 -  infofilm.vote_average)" class="far fa-star"></i></li>
                 <li class="overview"><strong>Overview: </strong>{{infofilm.overview}}</li>
               </ul>
