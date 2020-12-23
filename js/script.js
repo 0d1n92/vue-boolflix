@@ -78,15 +78,14 @@ var  app= new Vue({
 
               self.films.forEach((item, i) => {
                 if (self.films.length > 0 ) {
-                  self.findGenre(item, information[2].data.genres);
-                
-
+                  let nameGenres=[];
+                  self.findGenre(item, information[2].data.genres,nameGenres)
                   // console.log(self.id);
                   // console.log(apiFilms);
                   // if (i<=4){
                   //   item.cast=information[2].data.cast;
                   // }
-                  console.log(item.cast)
+                  console.log(item);
                   item.vote_average=self.voteAverageRound(informationMarge[i].vote_average);
 
                 }
@@ -105,11 +104,20 @@ var  app= new Vue({
       return voteRound;
     },
 
-    findGenre: function (element, arrayId) {
-      arrayId.forEach((item, i) => {
-        if(item.id==element.genre_ids){
-          element.genre=item.name;
-        }
+    findGenre: function (element, arrayIdgeneres,nameGenres) {
+      console.log(element);
+      arrayIdgeneres.forEach((item, i) => {
+        element.genre_ids.forEach((itemGenrs, i) => {
+          console.log(item);
+          console.log(itemGenrs);
+          if(item.id==itemGenrs){
+            nameGenres[nameGenres.length]=item.name;
+          }
+        });
+
+
+
+        element.genre=nameGenres;
 
       });
       return element;
