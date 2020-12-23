@@ -51,7 +51,7 @@ Ricreiamo una webapp, con layout simil-Netflix
                     {{infofilm.original_name}}
                   </span>
                 </li>
-                <li>Genere: {{infofilm.genre}}</li>
+                <li class="genrs"><strong>Geners:</strong> <span v-for= "genrs in infofilm.genre">{{genrs}}</span></li>
                 <li>
                   <strong>Leanguages:</strong>
                     <img v-if="infofilm.original_language == 'en'|| infofilm.original_language=='it' || infofilm.original_language=='ja'" :src="'img/icons/'+ infofilm.flag_img" :alt="infofilm.original_language"><span v-else>

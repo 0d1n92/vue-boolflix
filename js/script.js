@@ -13,7 +13,7 @@ var  app= new Vue({
     titleSearch:'',
     id:'',
     films:[],
-    img_url: "https://image.tmdb.org/t/p/w342/",
+    img_url: "https://image.tmdb.org/t/p/w220_and_h330_face/",
   },
   methods: {
     search:function (array) {

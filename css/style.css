@@ -129,6 +129,9 @@ ul.info > li h2 {
 .vote ~ i.fa-star {
   color:#ffbd00;
 }
+li.genrs > span {
+  padding: 0 5px;
+}
 .container_overview {
   width: 100%;
 }
