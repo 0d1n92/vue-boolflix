@@ -31,7 +31,7 @@ Ricreiamo una webapp, con layout simil-Netflix
         </div>
         <div id="header_right"  class="float_right">
           <nav>
-            <input  v-model="title" @keydown="search()" type="search" name="" value="">
+            <input  v-model="titleSearch" @keydown="search()" type="search" name="" value="">
           </nav>
         </div>
       </header>
@@ -51,6 +51,7 @@ Ricreiamo una webapp, con layout simil-Netflix
                     {{infofilm.original_name}}
                   </span>
                 </li>
+                <li>genere: {{infofilm.genre}}</li>
                 <li>
                   <strong>Leanguages:</strong>
                     <img v-if="infofilm.original_language == 'en'|| infofilm.original_language=='it' || infofilm.original_language=='ja'" :src="'img/icons/'+ infofilm.flag_img" :alt="infofilm.original_language"><span v-else>

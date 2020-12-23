@@ -126,7 +126,9 @@ ul.info > li h2 {
   vertical-align: middle;
   font-weight: 900;
 } */
-
+.vote ~ i.fa-star {
+  color:#ffbd00;
+}
 .container_overview {
   width: 100%;
 }
