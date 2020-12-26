@@ -11,7 +11,6 @@ var  app= new Vue({
 
   data: {
     titleSearch:'',
-    id:'',
     films:[],
     img_url: "https://image.tmdb.org/t/p/w220_and_h330_face/",
   },
@@ -19,27 +18,10 @@ var  app= new Vue({
     search:function (array) {
       let self= this;
       const apiKey="498c9ec3394d0a225e5b99e29b024805";
-      let apiFilms="https://api.themoviedb.org/3/movie/"+self.id+"/credits"
-      // let apiFilms= axios.get('https://api.themoviedb.org/3/search/tv', {
-      //   params: {
-      //     api_key:apiKey,
-      //     query: self.titleSearch,
-      //     language:"it-IT",
-      //   }
-      // });
-      //
-      // let apiSeries= axios.get('https://api.themoviedb.org/3/search/tv', {
-      //   params: {
-      //     api_key:apiKey,
-      //     query: self.titleSearch,
-      //     language:"it-IT",
-      //   }
-      // });
+      // let apiFilms=`https://api.themoviedb.org/3/movie/${cast}/credits`
 
-      // Promise.all([axios.get(apiFilms),axios.get(apiSeries)]).then(function(values) {
-      //   console.log(values);
-      // });
-      if (self.titleSearch!="" && self.titleSearch.length >= 3) {
+
+      if (self.titleSearch!="") {
         // Allarghiamo poi la ricerca anche alle serie tv. Con la stessa azione di ricerca dovremo prendere sia i film che corrispondono alla query, sia le serie tv, stando attenti ad avere alla fine dei valori simili (le serie e i film hanno campi nel JSON di risposta diversi, simili ma non sempre identici)
         Promise.all([
           axios.get('https://api.themoviedb.org/3/search/movie', {
@@ -62,38 +44,30 @@ var  app= new Vue({
               language:"it-IT",
             }
           }),
-          // axios.get(apiFilms, {
-          //    params: {
-          //      api_key:apiKey,
-          //      language:"it-IT",
-          //    }
-          // })
+
         ])
         .then(
           function (information) {
+          setTimeout(function (){
 
-              setTimeout(function (){
-              const informationMarge=[...information[0].data.results,...information[1].data.results,];
+              const informationMarge=[...information[0].data.results,...information[1].data.results];
               self.films= self.leanguagesFlag(informationMarge);
-
               self.films.forEach((item, i) => {
                 if (self.films.length > 0 ) {
                   let nameGenres=[];
-                  self.findGenre(item, information[2].data.genres,nameGenres)
-                  // console.log(self.id);
-                  // console.log(apiFilms);
-                  // if (i<=4){
-                  //   item.cast=information[2].data.cast;
-                  // }
+
                   console.log(item);
+                  self.getCast(item,"498c9ec3394d0a225e5b99e29b024805");
+
+                  self.getGenres(item, information[2].data.genres,nameGenres);
+
                   item.vote_average=self.voteAverageRound(informationMarge[i].vote_average);
 
                 }
               });
-            },4000);
-        });
-      } else {
-        self.films=[];
+            },3500);
+
+          });
       }
      },
      // Trasformiamo il voto da 1 a 10 decimale in un numero intero da 1 a 5, così da permetterci di stampare a schermo un numero di stelle piene che vanno da 1 a 5, lasciando le restanti vuote (troviamo le icone in FontAwesome).
@@ -104,28 +78,22 @@ var  app= new Vue({
       return voteRound;
     },
 
-    findGenre: function (element, arrayIdgeneres,nameGenres) {
-      console.log(element);
+    getGenres: function (element, arrayIdgeneres,nameGenres) {
       arrayIdgeneres.forEach((item, i) => {
         element.genre_ids.forEach((itemGenrs, i) => {
-          console.log(item);
-          console.log(itemGenrs);
           if(item.id==itemGenrs){
             nameGenres[nameGenres.length]=item.name;
           }
         });
-
-
-
         element.genre=nameGenres;
 
       });
       return element;
     },
 
-    leanguagesFlag: function (array) {
+    leanguagesFlag: function (arrayFilmsAndTvShow) {
 
-      array.forEach((item, i) => {
+      arrayFilmsAndTvShow.forEach((item, i) => {
         if(item.original_language ==="en") {
           item.flag_img="uk-16.png";
         } else if (item.original_language ==="it") {
@@ -135,8 +103,36 @@ var  app= new Vue({
         };
 
       });
-        return array;
-    }
+        return arrayFilmsAndTvShow;
+    },
+
+    getCast:function (itemFilmsAndTvShow, apiKey){
+      let idFilms=itemFilmsAndTvShow.id;
+      let self=this;
+      itemFilmsAndTvShow.cast="prova di pippo";
+      axios.get(
+        `https://api.themoviedb.org/3/movie/${idFilms}/credits`,
+        {
+          params: {
+            api_key:apiKey,
+            language:"it-IT",
+          }
+        }).then(
+          function (results) {
+            itemFilmsAndTvShow.cast = results.data.cast;
+            self.$forceUpdate();
+
+          })
+          .catch(function (error) {
+            itemFilmsAndTvShow.cast ="cast not found";
+            self.$forceUpdate();
+          }
+
+        );
+
+
+    },
+
 
   }
 });

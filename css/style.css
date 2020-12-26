@@ -1,3 +1,8 @@
+.debug {
+  z-index: 10000;
+  position: absolute;
+  background-color: red;
+}
 /* RESET */
 * {
   margin:0;
@@ -93,7 +98,7 @@ section.box_film .hover_box {
   height: 100%;
   width: 100%;
   color: white;
-  padding: 50px 10px 0px 10px;
+  padding: 20px 10px 0px 10px;
   top:0;
   position: absolute;
   display: none;
@@ -129,8 +134,12 @@ ul.info > li h2 {
 .vote ~ i.fa-star {
   color:#ffbd00;
 }
+
 li.genrs > span {
   padding: 0 5px;
+}
+ul.info > li span.actor {
+  padding: 0 2px;
 }
 .container_overview {
   width: 100%;

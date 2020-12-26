@@ -59,6 +59,10 @@ Ricreiamo una webapp, con layout simil-Netflix
                   </span>
                 </li>
                 <li><strong class="vote">Vote:</strong> <i v-for="star in infofilm.vote_average" class="fas fa-star"></i><i v-for="star in (5 -  infofilm.vote_average)" class="far fa-star"></i></li>
+                <li >
+                  <strong>Cast:</strong>
+                  <span class="actor" v-for="actor in 4">{{infofilm.cast[actor].name}}</span>
+                </li>
                 <li class="overview"><strong>Overview: </strong>{{infofilm.overview}}</li>
               </ul>
             </div>
