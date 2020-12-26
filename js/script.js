@@ -9,6 +9,7 @@ var  app= new Vue({
   el: '#app',
 
 
+
   data: {
     titleSearch:'',
     films:[],
@@ -109,7 +110,7 @@ var  app= new Vue({
     getCast:function (itemFilmsAndTvShow, apiKey){
       let idFilms=itemFilmsAndTvShow.id;
       let self=this;
-      itemFilmsAndTvShow.cast="prova di pippo";
+      itemFilmsAndTvShow.cast=[];
       axios.get(
         `https://api.themoviedb.org/3/movie/${idFilms}/credits`,
         {
@@ -119,20 +120,34 @@ var  app= new Vue({
           }
         }).then(
           function (results) {
-            itemFilmsAndTvShow.cast = results.data.cast;
-            self.$forceUpdate();
-
+            itemFilmsAndTvShow.cast=[];
+            self.pushArray4items(itemFilmsAndTvShow.cast, results.data.cast);
           })
           .catch(function (error) {
-            itemFilmsAndTvShow.cast ="cast not found";
-            self.$forceUpdate();
+            axios.get(
+              `https://api.themoviedb.org/3/tv/${idFilms}/credits`,
+              {
+                params: {
+                  api_key:apiKey,
+                  language:"it-IT",
+                }
+              }).then(
+                function (results) {
+                self.pushArray4items(itemFilmsAndTvShow.cast, results.data.cast);
+
+                })
           }
-
-        );
-
-
+       );
     },
-
+    
+    pushArray4items: function (array1, array2) {
+      for(let i=0; i< 4; i++){
+        array1.push(
+           array2[i]
+        );
+      }
+      this.$forceUpdate();
+    }
 
   }
 });
