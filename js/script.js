@@ -6,35 +6,28 @@ var  app= new Vue({
   data: {
     titleSearch:'',
     films:[],
+    apiKey:"498c9ec3394d0a225e5b99e29b024805",
+    listAllGenrs:[],
     img_url: "https://image.tmdb.org/t/p/w220_and_h330_face/",
   },
   methods: {
     search:function (array) {
       let self= this;
-      const apiKey="498c9ec3394d0a225e5b99e29b024805";
       // let apiFilms=`https://api.themoviedb.org/3/movie/${cast}/credits`
-
-
       if (self.titleSearch!="" && self.titleSearch.length>=2) {
         // Allarghiamo poi la ricerca anche alle serie tv. Con la stessa azione di ricerca dovremo prendere sia i film che corrispondono alla query, sia le serie tv, stando attenti ad avere alla fine dei valori simili (le serie e i film hanno campi nel JSON di risposta diversi, simili ma non sempre identici)
         Promise.all([
           axios.get('https://api.themoviedb.org/3/search/movie', {
             params: {
-              api_key:apiKey,
+              api_key:self.apiKey,
               query: self.titleSearch,
               language:"it-IT",
             }
           }),
           axios.get('https://api.themoviedb.org/3/search/tv', {
             params: {
-              api_key:apiKey,
+              api_key:self.apiKey,
               query: self.titleSearch,
-              language:"it-IT",
-            }
-          }),
-          axios.get('https://api.themoviedb.org/3/genre/movie/list', {
-            params: {
-              api_key:apiKey,
               language:"it-IT",
             }
           }),
@@ -48,12 +41,11 @@ var  app= new Vue({
               self.films= self.leanguagesFlag(informationMarge);
               self.films.forEach((item, i) => {
                 if (self.films.length > 0 ) {
-                  let nameGenres=[];
+                  const nameGenres=[];
 
-                  console.log(item);
-                  self.getCast(item,apiKey);
+                  self.getCast(item,self.apiKey);
 
-                  self.getGenres(item, information[2].data.genres,nameGenres);
+                  self.getGenres(item, self.listAllGenrs,nameGenres);
 
                   item.vote_average=self.voteAverageRound(informationMarge[i].vote_average);
 
@@ -72,8 +64,8 @@ var  app= new Vue({
       return voteRound;
     },
 
-    getGenres: function (element, arrayIdgeneres,nameGenres) {
-      arrayIdgeneres.forEach((item, i) => {
+    getGenres: function (element, containerGeneres,nameGenres) {
+      containerGeneres.forEach((item, i) => {
         element.genre_ids.forEach((itemGenrs, i) => {
           if(item.id==itemGenrs){
             nameGenres[nameGenres.length]=item.name;
@@ -138,7 +130,22 @@ var  app= new Vue({
         );
       }
       this.$forceUpdate();
-    }
+    },
+  },
+  mounted: function () {
+    console.log("prova");
+    let self=this;
+    axios.get('https://api.themoviedb.org/3/genre/movie/list', {
+      params: {
+        api_key:self.apiKey,
+        language:"it-IT",
+      }
+    }).then( function (result) {
+        self.listAllGenrs=result.data.genres;
+        console.log(self.listAllGenrs);
+    });
 
   }
+
+
 });

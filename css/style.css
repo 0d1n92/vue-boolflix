@@ -73,6 +73,13 @@ header {
 #header_right {
   line-height: 90px;
 }
+/* nav */
+#items_navbar > li {
+  display: inline-block;
+  list-style: none;
+  color: white;
+}
+/* nav close */
 /* header right CLOSE */
 
 /* HEADER-CLOSE */

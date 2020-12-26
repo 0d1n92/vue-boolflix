@@ -31,6 +31,9 @@ Ricreiamo una webapp, con layout simil-Netflix
         </div>
         <div id="header_right"  class="float_right">
           <nav>
+            <select class="filter_genrs" name="">
+              <option v-for="itemListAllGenrs in listAllGenrs"value="itemListAllGenrs.id">{{itemListAllGenrs.name}}</option>
+            </select>
             <input  v-model="titleSearch" @keydown="search()" type="search" name="" value="">
           </nav>
         </div>
