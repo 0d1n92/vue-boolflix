@@ -1,15 +1,8 @@
-
-// Milestone 4 (Opzionale):
-// Partendo da un film o da una serie, richiedere all'API quali sono gli attori che fanno parte del cast aggiungendo alla nostra scheda Film / Serie SOLO i primi 5 restituiti dall’API con Nome e Cognome, e i generi associati al film con questo schema: “Genere 1, Genere 2, …”.
-
-
+// Creare una lista di generi richiedendo quelli disponibili all'API e creare dei filtri con i generi tv e movie per mostrare/nascondere le schede ottenute con la ricerca.
 // Qui un esempio di chiamata per le serie tv:
 // https://api.themoviedb.org/3/search/tv?api_key=e99307154c6dfb0b4750f6603256716d&language=it_IT&query=scrubs
 var  app= new Vue({
   el: '#app',
-
-
-
   data: {
     titleSearch:'',
     films:[],
@@ -22,7 +15,7 @@ var  app= new Vue({
       // let apiFilms=`https://api.themoviedb.org/3/movie/${cast}/credits`
 
 
-      if (self.titleSearch!="") {
+      if (self.titleSearch!="" && self.titleSearch.length>=2) {
         // Allarghiamo poi la ricerca anche alle serie tv. Con la stessa azione di ricerca dovremo prendere sia i film che corrispondono alla query, sia le serie tv, stando attenti ad avere alla fine dei valori simili (le serie e i film hanno campi nel JSON di risposta diversi, simili ma non sempre identici)
         Promise.all([
           axios.get('https://api.themoviedb.org/3/search/movie', {
@@ -58,7 +51,7 @@ var  app= new Vue({
                   let nameGenres=[];
 
                   console.log(item);
-                  self.getCast(item,"498c9ec3394d0a225e5b99e29b024805");
+                  self.getCast(item,apiKey);
 
                   self.getGenres(item, information[2].data.genres,nameGenres);
 
@@ -120,7 +113,6 @@ var  app= new Vue({
           }
         }).then(
           function (results) {
-            itemFilmsAndTvShow.cast=[];
             self.pushArray4items(itemFilmsAndTvShow.cast, results.data.cast);
           })
           .catch(function (error) {
@@ -134,12 +126,11 @@ var  app= new Vue({
               }).then(
                 function (results) {
                 self.pushArray4items(itemFilmsAndTvShow.cast, results.data.cast);
-
                 })
           }
        );
     },
-    
+
     pushArray4items: function (array1, array2) {
       for(let i=0; i< 4; i++){
         array1.push(

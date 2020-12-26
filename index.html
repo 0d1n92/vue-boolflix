@@ -44,22 +44,21 @@ Ricreiamo una webapp, con layout simil-Netflix
               <ul class="info">
                 <li class="title_film"><strong>Title: </strong><h2 v-if="infofilm.title!=undefined" >{{infofilm.title}}</h2><h2 v-else>{{infofilm.name}}</h2> </li>
                 <li><strong>Original Title: </strong>
-                  <span v-if="infofilm.original_title!=undefined">
-                    {{infofilm.original_title}}
-                  </span>
-                  <span v-else>
-                    {{infofilm.original_name}}
-                  </span>
+                  <span v-if="infofilm.original_title!=undefined">{{infofilm.original_title}}</span>
+                  <span v-else>{{infofilm.original_name}}</span>
                 </li>
                 <li class="genrs"><strong>Geners:</strong> <span v-for= "genrs in infofilm.genre">{{genrs}}</span></li>
                 <li>
                   <strong>Leanguages:</strong>
-                    <img v-if="infofilm.original_language == 'en'|| infofilm.original_language=='it' || infofilm.original_language=='ja'" :src="'img/icons/'+ infofilm.flag_img" :alt="infofilm.original_language"><span v-else>
-                    {{infofilm.original_language}}
-                  </span>
+                    <img v-if="infofilm.original_language == 'en'|| infofilm.original_language=='it' || infofilm.original_language=='ja'" :src="'img/icons/'+ infofilm.flag_img" :alt="infofilm.original_language">
+                    <span v-else>{{infofilm.original_language}}</span>
                 </li>
-                <li><strong class="vote">Vote:</strong> <i v-for="star in infofilm.vote_average" class="fas fa-star"></i><i v-for="star in (5 -  infofilm.vote_average)" class="far fa-star"></i></li>
-                <li >
+                <li>
+                  <strong class="vote">Vote:</strong>
+                  <i v-for="star in infofilm.vote_average" class="fas fa-star"></i>
+                  <i v-for="star in (5 -  infofilm.vote_average)" class="far fa-star"></i>
+                </li>
+                <li>
                   <strong>Cast:</strong>
                   <span v-for="actor in infofilm.cast" class="actor" v-if="actor!=undefined && infofilm.cast.length!=0 && actor.name!=undefined">{{actor.original_name}}, </span>
                 </li>

@@ -114,6 +114,10 @@ section.box_film:hover .error_path {
 .box_film> img.cover  {
   height: 330px;
 }
+ul.info {
+  overflow: hidden;
+  height: 100%;
+}
 ul.info > li {
   list-style: none;
 }
@@ -137,6 +141,7 @@ ul.info > li h2 {
 
 li.genrs > span {
   padding: 0 5px;
+  word-break: break-all;
 }
 ul.info > li span.actor {
   padding: 0 2px;
@@ -148,8 +153,8 @@ ul.info > li span.actor {
 li.overview {
   display: block;
  overflow: auto;
- max-height: 150px;
- min-height: 100px;
+ max-height: 100px;
+ min-height: 70px;
 }
 li.overview::-webkit-scrollbar {
   width: 5px;
