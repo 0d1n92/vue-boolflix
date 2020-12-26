@@ -9,7 +9,7 @@ Ricreiamo una webapp, con layout simil-Netflix
         ◦ Lingua
         ◦ Voto sotto forma di stelline colorate
         ◦ Immagine placeholder larghezza  -->
-<html lang="en" dir="ltr">
+<html lang="it" dir="ltr">
   <head>
     <meta charset="utf-8">
     <title>Fake Netflix</title>
@@ -31,8 +31,9 @@ Ricreiamo una webapp, con layout simil-Netflix
         </div>
         <div id="header_right"  class="float_right">
           <nav>
-            <select class="filter_genrs" name="">
-              <option v-for="itemListAllGenrs in listAllGenrs"value="itemListAllGenrs.id">{{itemListAllGenrs.name}}</option>
+            <select v-model="typeGenrs" class="filter_genrs" name="">
+              <option value="0">Tutti i Generi</option>
+              <option v-for="itemListAllGenrs in listAllGenrs" :value="itemListAllGenrs.id">{{itemListAllGenrs.name}}</option>
             </select>
             <input  v-model="titleSearch" @keydown="search()" type="search" name="" value="">
           </nav>
@@ -42,7 +43,7 @@ Ricreiamo una webapp, con layout simil-Netflix
       <main>
 
         <div id="container_library">
-          <section  v-for="(infofilm,index) in films"  class="box_film">
+          <section  v-if="infofilm.genre_ids==typeGenrs|| typeGenrs==0" v-for="(infofilm,index) in films"  class="box_film">
             <div  class="hover_box">
               <ul class="info">
                 <li class="title_film"><strong>Title: </strong><h2 v-if="infofilm.title!=undefined" >{{infofilm.title}}</h2><h2 v-else>{{infofilm.name}}</h2> </li>

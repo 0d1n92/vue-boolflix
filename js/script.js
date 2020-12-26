@@ -8,6 +8,7 @@ var  app= new Vue({
     films:[],
     apiKey:"498c9ec3394d0a225e5b99e29b024805",
     listAllGenrs:[],
+    typeGenrs:0,
     img_url: "https://image.tmdb.org/t/p/w220_and_h330_face/",
   },
   methods: {
@@ -41,11 +42,11 @@ var  app= new Vue({
               self.films= self.leanguagesFlag(informationMarge);
               self.films.forEach((item, i) => {
                 if (self.films.length > 0 ) {
-                  const nameGenres=[];
+                  const newContainerNameGenres=[];
 
                   self.getCast(item,self.apiKey);
 
-                  self.getGenres(item, self.listAllGenrs,nameGenres);
+                  self.getGenres(item, self.listAllGenrs,newContainerNameGenres);
 
                   item.vote_average=self.voteAverageRound(informationMarge[i].vote_average);
 
@@ -64,14 +65,14 @@ var  app= new Vue({
       return voteRound;
     },
 
-    getGenres: function (element, containerGeneres,nameGenres) {
+    getGenres: function (element, containerGeneres,containerNameGenres) {
       containerGeneres.forEach((item, i) => {
         element.genre_ids.forEach((itemGenrs, i) => {
           if(item.id==itemGenrs){
-            nameGenres[nameGenres.length]=item.name;
+            containerNameGenres[containerNameGenres.length]=item.name;
           }
         });
-        element.genre=nameGenres;
+        element.genre=containerNameGenres;
 
       });
       return element;
@@ -81,10 +82,15 @@ var  app= new Vue({
 
       arrayFilmsAndTvShow.forEach((item, i) => {
         if(item.original_language ==="en") {
+
           item.flag_img="uk-16.png";
+
         } else if (item.original_language ==="it") {
+
           item.flag_img="it-16.png";
+
         } else if (item.original_language ==="ja") {
+
           item.flag_img="jp-16.png";
         };
 
@@ -107,7 +113,7 @@ var  app= new Vue({
           function (results) {
             self.pushArray4items(itemFilmsAndTvShow.cast, results.data.cast);
           })
-          .catch(function (error) {
+          .catch(function () {
             axios.get(
               `https://api.themoviedb.org/3/tv/${idFilms}/credits`,
               {
@@ -133,7 +139,6 @@ var  app= new Vue({
     },
   },
   mounted: function () {
-    console.log("prova");
     let self=this;
     axios.get('https://api.themoviedb.org/3/genre/movie/list', {
       params: {
@@ -142,7 +147,7 @@ var  app= new Vue({
       }
     }).then( function (result) {
         self.listAllGenrs=result.data.genres;
-        console.log(self.listAllGenrs);
+
     });
 
   }
