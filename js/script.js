@@ -113,18 +113,21 @@ var  app= new Vue({
           function (results) {
             self.pushArray4items(itemFilmsAndTvShow.cast, results.data.cast);
           })
-          .catch(function () {
-            axios.get(
-              `https://api.themoviedb.org/3/tv/${idFilms}/credits`,
-              {
-                params: {
-                  api_key:apiKey,
-                  language:"it-IT",
-                }
-              }).then(
-                function (results) {
-                self.pushArray4items(itemFilmsAndTvShow.cast, results.data.cast);
-                })
+          .catch(function (error) {
+            if(error.response.status==404){
+              console.clear();
+              axios.get(
+                `https://api.themoviedb.org/3/tv/${idFilms}/credits`,
+                {
+                  params: {
+                    api_key:apiKey,
+                    language:"it-IT",
+                  }
+                }).then(
+                  function (results) {
+                  self.pushArray4items(itemFilmsAndTvShow.cast, results.data.cast);
+                  })
+            }
           }
        );
     },
