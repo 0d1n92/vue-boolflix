@@ -64,7 +64,7 @@ Ricreiamo una webapp, con layout simil-Netflix
                 </li>
                 <li>
                   <strong>Cast:</strong>
-                  <span v-for="actor in infofilm.cast" class="actor" v-if="actor!=undefined && infofilm.cast.length!=0 && actor.name!=undefined">{{actor.original_name}}, </span>
+                  <span v-for="actor in infofilm.cast" class="actor" v-if="actor!=undefined && infofilm.cast.length!=0">{{actor.original_name}}, </span>
                 </li>
                 <li class="overview"><strong>Overview: </strong>{{infofilm.overview}}</li>
               </ul>

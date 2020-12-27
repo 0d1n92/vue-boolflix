@@ -130,10 +130,12 @@ var  app= new Vue({
     },
 
     pushArray4items: function (array1, array2) {
-      for(let i=0; i< 4; i++){
+      let i=0;
+      while(i<5 || array1[i]!=undefined){
         array1.push(
            array2[i]
         );
+        i++
       }
       this.$forceUpdate();
     },
