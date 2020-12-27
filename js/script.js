@@ -126,7 +126,11 @@ var  app= new Vue({
                 }).then(
                   function (results) {
                   self.pushArray4items(itemFilmsAndTvShow.cast, results.data.cast);
-                  })
+                }).catch(function (error){
+                  if(error.response.status==404){
+                    console.log("Get 404 error in Movie api or in Tv ap ")
+                  }
+              });
             }
           }
        );

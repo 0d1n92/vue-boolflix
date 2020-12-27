@@ -43,7 +43,7 @@ Ricreiamo una webapp, con layout simil-Netflix
       <main>
 
         <div id="container_library">
-          <section  v-if="infofilm.genre_ids==typeGenrs|| typeGenrs==0" v-for="(infofilm,index) in films"  class="box_film">
+          <section  v-if="infofilm.genre_ids.includes(typeGenrs)|| typeGenrs==0" v-for="(infofilm,index) in films"  class="box_film">
             <div  class="hover_box">
               <ul class="info">
                 <li class="title_film"><strong>Title: </strong><h2 v-if="infofilm.title!=undefined" >{{infofilm.title}}</h2><h2 v-else>{{infofilm.name}}</h2> </li>
