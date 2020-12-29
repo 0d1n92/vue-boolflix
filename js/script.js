@@ -37,8 +37,11 @@ var  app= new Vue({
         .then(
           function (information) {
           setTimeout(function (){
-
               const informationMarge=[...information[0].data.results,...information[1].data.results];
+              information[1].data.results.forEach((item, i) => {
+                item.type="tv";
+              });
+
               self.films= self.leanguagesFlag(informationMarge);
               self.films.forEach((item, i) => {
                 if (self.films.length > 0 ) {
@@ -102,38 +105,32 @@ var  app= new Vue({
       let idFilms=itemFilmsAndTvShow.id;
       let self=this;
       itemFilmsAndTvShow.cast=[];
-      axios.get(
-        `https://api.themoviedb.org/3/movie/${idFilms}/credits`,
-        {
-          params: {
-            api_key:apiKey,
-            language:"it-IT",
-          }
-        }).then(
-          function (results) {
-            self.pushArray4items(itemFilmsAndTvShow.cast, results.data.cast);
-          })
-          .catch(function (error) {
-            if(error.response.status==404){
-              console.clear();
-              axios.get(
-                `https://api.themoviedb.org/3/tv/${idFilms}/credits`,
-                {
-                  params: {
-                    api_key:apiKey,
-                    language:"it-IT",
-                  }
-                }).then(
-                  function (results) {
-                  self.pushArray4items(itemFilmsAndTvShow.cast, results.data.cast);
-                }).catch(function (error){
-                  if(error.response.status==404){
-                    console.log("Get 404 error in Movie api or in Tv ap ")
-                  }
-              });
+      if(itemFilmsAndTvShow.type=="tv") {
+        axios.get(
+          `https://api.themoviedb.org/3/tv/${idFilms}/credits`,
+          {
+            params: {
+              api_key:apiKey,
+              language:"it-IT",
             }
-          }
-       );
+          }).then(
+            function (results) {
+            self.pushArray4items(itemFilmsAndTvShow.cast, results.data.cast);
+          });
+      } else {
+        axios.get(
+          `https://api.themoviedb.org/3/movie/${idFilms}/credits`,
+          {
+            params: {
+              api_key:apiKey,
+              language:"it-IT",
+            }
+          }).then(
+            function (results) {
+              self.pushArray4items(itemFilmsAndTvShow.cast, results.data.cast);
+            });
+      }
+
     },
 
     pushArray4items: function (array1, array2) {
