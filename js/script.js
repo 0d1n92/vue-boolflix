@@ -12,7 +12,7 @@ var  app= new Vue({
     img_url: "https://image.tmdb.org/t/p/w220_and_h330_face/",
   },
   methods: {
-    search:function (array) {
+    search:function () {
       let self= this;
       // let apiFilms=`https://api.themoviedb.org/3/movie/${cast}/credits`
       if (self.titleSearch!="" && self.titleSearch.length>=2) {
@@ -36,7 +36,7 @@ var  app= new Vue({
         ])
         .then(
           function (information) {
-          setTimeout(function (){
+
               const informationMarge=[...information[0].data.results,...information[1].data.results];
               information[1].data.results.forEach((item, i) => {
                 item.type="tv";
@@ -55,10 +55,20 @@ var  app= new Vue({
 
                 }
               });
-            },3500);
+
 
           });
       }
+
+     },
+     debounce: function (delay) {
+       let self=this;
+       let timeoutID;
+       clearTimeout(timeoutID);
+         timeoutID= setTimeout(()=>{
+           self.search();
+         },delay)
+
      },
      // Trasformiamo il voto da 1 a 10 decimale in un numero intero da 1 a 5, così da permetterci di stampare a schermo un numero di stelle piene che vanno da 1 a 5, lasciando le restanti vuote (troviamo le icone in FontAwesome).
     voteAverageRound: function (vote) {
