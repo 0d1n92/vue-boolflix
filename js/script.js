@@ -58,6 +58,8 @@ var  app= new Vue({
 
 
           });
+      } else {
+        self.films=[];
       }
 
      },
